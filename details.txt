@@ -1,0 +1,21 @@
+--------------------------------
+- Player Account Details
+1) Account Level 
+2) Evo Level 
+3) Start Season
+4) Achievement Points
+--------------------------------
+- RP Seasons  (Season S2) to (Season M5)
+--------------------------------
+- Conquer Seasons
+--------------------------------
+- Add X Suits
+--------------------------------
+- Mythic Fashion Count
+--------------------------------
+- Gun Lab Details
+--------------------------------
+- Beard / Twin Hair Unlocked
+--------------------------------
+- Logins 
+--------------------------------
