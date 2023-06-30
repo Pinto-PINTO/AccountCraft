@@ -172,58 +172,85 @@
                         <h1 class="text-center">Create your Description</h1>
                         <p class="text-center">It's easy to create a description for your gaming account, just fill out the form and click submit. Then an awesome description will be generated using one of the best algorithms in the industry</p>
                         <br>
-                        
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+
+                <div class="col-lg-12">
+                    <!-- Description Form -->
+                    <form id="registrationForm" data-toggle="validator" data-focus="false">
+
+                        <!-- START - Player Account Details Section -->
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
                                 <i class="fas fa-square"></i>
                                 <div class="media-body"><strong>Player Account Details</strong></div>
                             </li>
-                            <!-- <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body"><strong>It's safe with us</strong> and will not be used for marketing</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body"><strong>You will receive</strong> a confirmation email in less than 24h</div>
-                            </li> -->
                         </ul>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-12">
-
-                    <!-- Registration Form -->
-                    <div class="form-container">
-                        <form id="registrationForm" data-toggle="validator" data-focus="false">
+                        <div class="form-container">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <input type="text" class="form-control-input" id="rname" name="rname" required>
-                                        <label class="label-control" for="rname">Account Level</label>
+                                        <input type="text" class="form-control-input" id="accLevel" name="accLevel" required>
+                                        <label class="label-control" for="accLevel">Account Level</label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <input type="email" class="form-control-input" id="remail" name="remail" required>
-                                        <label class="label-control" for="remail">Evo Level</label>
+                                        <input type="email" class="form-control-input" id="evoLevel" name="evoLevel" required>
+                                        <label class="label-control" for="evoLevel">Evo Level</label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <input type="text" class="form-control-input" id="rsseason" name="rsseason" required>
-                                        <label class="label-control" for="rsseason">Start Season</label>
+                                        <input type="text" class="form-control-input" id="sSeason" name="sSeason" required>
+                                        <label class="label-control" for="sSeason">Start Season</label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <input type="text" class="form-control-input" id="rachpoints" name="rachpoints" required>
-                                        <label class="label-control" for="rachpoints">Achievement Points</label>
+                                        <input type="text" class="form-control-input" id="achPoints" name="achPoints" required>
+                                        <label class="label-control" for="achPoints">Achievement Points</label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                             </div>                         
+                        </div>
+                        <br>
+                        <!-- END - Player Account Details Section -->
+
+                        <!-- START - Player Account Details Section -->
+                        <ul class="list-unstyled li-space-lg">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body"><strong>Royal Pass Seasons</strong></div>
+                            </li>
+                        </ul>
+                        <div class="form-container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control-input" id="rpFirstSeason" name="rpFirstSeason" required>
+                                        <label class="label-control" for="rpFirstSeason">First Royal Pass Season</label>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control-input" id="rpLastSeason" name="rpLastSeason" required>
+                                        <label class="label-control" for="rpLastSeason">Last Royal Pass Season</label>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>                         
+                        </div>
+                        <br>
+                        <!-- END - Player Account Details Section -->
+
+                        <!-- START - Privacy Policy & Register Section  -->
+                        <div class="form-container">
                             <div class="form-group checkbox">
                                 <input type="checkbox" id="rterms" value="Agreed-to-Terms" name="rterms" required>I've read and agree to Corso's written <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms & Conditions</a>
                                 <div class="help-block with-errors"></div>
@@ -234,11 +261,14 @@
                             <div class="form-message">
                                 <div id="rmsgSubmit" class="h3 text-center hidden"></div>
                             </div>
-                        </form>
-                    </div> <!-- end of form-container -->
-                    <!-- end of registration form -->
-                    
+                        </div>
+                        <!-- END - Privacy Policy & Register Section  -->
+
+
+
+                    </form><!-- end of description form -->
                 </div> <!-- end of col -->
+
             </div> <!-- end of row -->
         </div> <!-- end of container -->
     </div> <!-- end of form-1 -->
