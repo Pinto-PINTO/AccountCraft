@@ -189,6 +189,39 @@
 		}
     });
 
+    // -------------------------------------------
+    // -------------------------------------------
+    // Description Form element
+    const form = document.getElementById('descriptionForm');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Player Account Details
+        const accountLevel = document.getElementById('accLevel');
+        const evoLevel = document.getElementById('evoLevel');
+        const startSeason = document.getElementById('sSeason');
+        const achievePoints = document.getElementById('achPoints');
+
+        // RP Seasons
+        const rpFirstSeason = document.getElementById('rpFirstSeason');
+        const rpLastSeason = document.getElementById('rpLastSeason');
+
+
+
+        // Do something with the value (e.g., display it)
+        console.log('Acc Level:', accountLevel.value);
+        console.log('Evo:', evoLevel.value);
+        console.log('Start S:', startSeason.value);
+        console.log('Achieve:', achievePoints.value);
+        console.log('RP First:', rpFirstSeason.value);
+        console.log('RP Last:', rpLastSeason.value);
+
+        // You can also clear the input field after submission if needed
+        // nameInput.value = '';
+    });
+    // -------------------------------------------
+    // -------------------------------------------
 
     /* Registration Form */
     $("#registrationForm").validator().on("submit", function(event) {
