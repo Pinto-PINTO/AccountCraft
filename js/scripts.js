@@ -194,9 +194,11 @@
     // Description Form element
     const form = document.getElementById('descriptionForm');
     const textarea = document.getElementById('descriptionTextArea');
-
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
+
+        const copyButton = document.getElementById('copyButton');
+        copyButton.innerText = 'Copy to Clipboard'; // By Default after each change
 
         // Player Account Details
         const accountLevel = document.getElementById('accLevel').value;
