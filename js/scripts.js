@@ -193,29 +193,35 @@
     // -------------------------------------------
     // Description Form element
     const form = document.getElementById('descriptionForm');
+    const textarea = document.getElementById('descriptionTextArea');
 
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
 
         // Player Account Details
-        const accountLevel = document.getElementById('accLevel');
-        const evoLevel = document.getElementById('evoLevel');
-        const startSeason = document.getElementById('sSeason');
-        const achievePoints = document.getElementById('achPoints');
+        const accountLevel = document.getElementById('accLevel').value;
+        const evoLevel = document.getElementById('evoLevel').value;
+        const startSeason = document.getElementById('sSeason').value;
+        const achievePoints = document.getElementById('achPoints').value;
 
         // RP Seasons
-        const rpFirstSeason = document.getElementById('rpFirstSeason');
-        const rpLastSeason = document.getElementById('rpLastSeason');
-
+        const rpFirstSeason = document.getElementById('rpFirstSeason').value;
+        const rpLastSeason = document.getElementById('rpLastSeason').value;
 
 
         // Do something with the value (e.g., display it)
-        console.log('Acc Level:', accountLevel.value);
-        console.log('Evo:', evoLevel.value);
-        console.log('Start S:', startSeason.value);
-        console.log('Achieve:', achievePoints.value);
-        console.log('RP First:', rpFirstSeason.value);
-        console.log('RP Last:', rpLastSeason.value);
+        console.log('Acc Level:', accountLevel);
+        console.log('Evo:', evoLevel);
+        console.log('Start S:', startSeason);
+        console.log('Achieve:', achievePoints);
+        console.log('RP First:', rpFirstSeason);
+        console.log('RP Last:', rpLastSeason);
+
+        // Build the text to be populated in the textarea
+        const text = `Acc Level: ${accountLevel}\n Evo Level: ${evoLevel}`;
+
+        // Populate TextArea
+        textarea.value = text;
 
         // You can also clear the input field after submission if needed
         // nameInput.value = '';
