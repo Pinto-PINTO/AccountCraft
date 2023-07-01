@@ -30,6 +30,9 @@
 	
 	<!-- Favicon  -->
     <link rel="icon" href="images/favicon.png">
+
+    <!-- Fuzzy Searching Library for Auto-complete -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.min.js"></script>
 </head>
 <body data-spy="scroll" data-target=".fixed-top">
     
@@ -248,6 +251,33 @@
                         </div>
                         <br>
                         <!-- END - Player Account Details Section -->
+
+                         <!-- START - Gun Lab Section -->
+                         <ul class="list-unstyled li-space-lg">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body"><strong>Gun Lab</strong></div>
+                            </li>
+                        </ul>
+                        <div class="form-container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group specialFormGroup">
+                                        <div class="query-filter">
+                                            <input type="text" class="form-control-input" id="gunLabWeaponSearch" name="gunLabWeaponSearch" required>
+                                            <label class="label-control" for="gunLabWeaponSearch">Select the Upgradable Gun from Inventory</label>
+                                            <div class="gun-lab-auto-complete" tabindex="0">
+                                                <ul class="gun-lab-auto-complete__options">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="help-block with-errors"></div>
+                                    </div>                                 
+                                </div>
+                            </div>                         
+                        </div>
+                        <br>
+                        <!-- END - Gun Lab Section -->
 
                         <!-- START - Privacy Policy & Register Section  -->
                         <div class="form-container">

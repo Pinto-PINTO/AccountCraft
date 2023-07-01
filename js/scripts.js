@@ -296,6 +296,114 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
     // -------------------------------------------
     // -------------------------------------------
 
+    // -------------------------------------------
+    // START - Gun Lab Auto Complete
+    // -------------------------------------------
+    const searchInput = document.querySelector("#gunLabWeaponSearch");
+    const resultParent = document.querySelector(".gun-lab-auto-complete");
+    const formParent = document.querySelector(".form-group");
+    let searchOptions = [
+        "AKM - GLACIER",
+        "AKM - STAR SEA",
+        "AKM - GHILLIE DRAGON",
+        "AKM - GOLD PIRATE",
+        "AUG - WANDERING CIR",
+        "AWM - GODZILLA",
+        "AWM - MAUVE AVENGER",
+        "BIZON - BLAZING",
+        "BIZON - SKULL CRUSHER",
+        "PP-BIZON - SKULLCRUSHER",
+        "PP-BIZON - BLAZING",
+        "DP28 - JADE DRAGON",
+        "DP28 - GILDED DRAGON",
+        "DP28 - ENIGMATIC KILLER",
+        "GROZA - EVENTIDE ARIA",
+        "GROZA - RYOMEN SUKUNA",
+        "KAR98K - NEBULA HUNTER",
+        "KAR98K - MOONLIT GRACE",
+        "KAR98K - NIGHT ROCK",
+        "M16A4 - AURORA PULSE",
+        "M16A4 - SKELETAL CORE",
+        "M24 - KILLER TUNE",
+        "M24 - PHARAOH MIGHT",
+        "M24 - LADY BUTTERFLY",
+        "M249 - PARTY PARCEL",
+        "M249 - WINTER QUEEN",
+        "MG3 - SOARING DRAGON",
+        "M416 - GLACIER",
+        "M416 - FOOL",
+        "M416 - WANDERER",
+        "M762 - STRAY REBELLION",
+        "M762 - DEADLY PRECISION",
+        "M762 - 8-BIT UNICORN",
+        "MINI14 - ICICLE",
+        "PAN - ACCOLADE",
+        "PAN - NIGHT ROCK",
+        "PAN - TASTY CHEESE",
+        "QBZ - DAZZLING SUN",
+        "QBZ - FATAL STRIKE",
+        "SCAR-L - PUMPKIN",
+        "SCAR-L - BLOODSTAINED",
+        "SCAR-L - DROP THE BASS",
+        "SKORPION - GOLDEN CIPHER",
+        "SKS - SNOWCAPPED",
+        "SKS - LADY CARMINE",
+        "SKS - METAL MEDLEY",
+        "THOMPSON - STEAMPUNK",
+        "THOMPSON - CANDY CANE",
+        "UMP45 - EMP",
+        "UMP45 - ANNIVERSARY (AUTO MAX)",
+        "UMP45 - PLATINUM RIPPER",
+        "UMP45 - 8-BIT BLAST",
+        "UMP45 - RAINBOW",
+        "UZI - SHIMMER PWR",
+        "UZI - ETHEREAL EMBLEM",
+        "UZI - ROMANTIC MOMENTS",
+        "VECTOR - BLOOD TOOTH",
+        "VECTOR - GOLDEN EARL",
+        "VSS - CROW",
+        "MACHETE - DRAKONBANE"
+    ];
+
+    const fuse = new Fuse(searchOptions, { threshold: 0.2 });
+
+    const updateResults = (event) => {
+        let list = "";
+        const inputField = event.currentTarget;
+        const searchResults = fuse.search(inputField.value);
+
+        // toggle auto complete dropdown
+        if (inputField.value.length > 0) {
+            formParent.classList.add("active");
+        } else {
+            formParent.classList.remove("active");
+        }
+
+        if (searchResults.length > 0) {
+            searchResults.map(
+                (listItem) => (list += `<li tabindex="0">${listItem.item}</li>`)
+            );
+        } else {
+            list = "No results found";
+        }
+
+        resultParent.innerHTML = list;
+    };
+
+    searchInput.addEventListener("keyup", (event) => updateResults(event));
+
+    resultParent.addEventListener("click", (event) => {
+        const clickedItem = event.target;
+        if (clickedItem.tagName === "LI") {
+            searchInput.value = clickedItem.textContent;
+            formParent.classList.remove("active");
+        }
+    });
+    // -------------------------------------------
+    // END - Gun Lab Auto Complete
+    // -------------------------------------------
+
+
     /* Registration Form */
     $("#registrationForm").validator().on("submit", function(event) {
     	if (event.isDefaultPrevented()) {

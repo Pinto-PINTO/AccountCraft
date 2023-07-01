@@ -2365,3 +2365,34 @@ a:hover.back-to-top {
 /* ----------------------------- */
 /* END - Generated Text Section  */
 /* ----------------------------- */
+
+
+/* Auto complete */
+/* ------------------------- */
+.query-filter {
+	position: relative;
+}
+.gun-lab-auto-complete {
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	background: #fff;
+}
+.gun-lab-auto-complete__options {
+	display: none;
+	border: 1px solid #ddd;
+	padding: 1.6em 18px;
+	margin: 0;
+	list-style-type: none;
+}
+.gun-lab-auto-complete__options li {
+	margin-bottom: 1.5em;
+	font-size: 1.1em;
+}
+.gun-lab-auto-complete__options li:last-of-type {
+	margin-bottom: 0;
+}
+
+.specialFormGroup.active .gun-lab-auto-complete__options {
+	display: block;
+}
