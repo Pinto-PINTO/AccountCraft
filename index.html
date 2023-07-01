@@ -323,9 +323,8 @@
                         <h1 class="text-center">Generated Description</h1>
                         <p class="text-center">It's easy to create a description for your gaming account, just fill out the form and click submit. Then an awesome description will be generated using one of the best algorithms in the industry</p>
                         <div class="text-center">
-                            <button class="btn-solid-lg">Copy to Clipboard</button>
-                        </div>
-                        
+                            <button id="copyButton" class="btn-solid-lg" onclick="copyToClipboard()">Copy to Clipboard</button>
+                        </div>                        
                     </div> <!-- end of text-container -->
                 </div>
             </div>
@@ -343,6 +342,20 @@
                     
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis maximus odio a mattis. Cras faucibus odio id ipsum imperdiet pellentesque. Pellentesque et porta felis. Aenean porta accumsan magna quis posuere. Vivamus sit amet ante est. Pellentesque rhoncus viverra nibh, vel semper libero scelerisque nec. Pellentesque pellentesque dui id purus rutrum, nec venenatis ex blandit. 
                   </textarea>
+                    <script>
+                        // const copyButton = document.getElementById('copyButton');
+                        
+                        function copyToClipboard() { 
+                            const textarea1 = document.getElementById('descriptionTextArea');                               
+                            textarea1.select();
+                            document.execCommand('copy');
+                            textarea1.blur(); // Remove focus from the textarea
+
+                            const copyButton = document.getElementById('copyButton');
+                            copyButton.innerText = 'Copied!';
+                        }
+
+                    </script>
                 </div>
             </div>
         </div> <!-- end of container -->
