@@ -300,8 +300,8 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
     // START - Gun Lab Auto Complete
     // -------------------------------------------
     const searchInput = document.querySelector("#gunLabWeaponSearch");
-    const resultParent = document.querySelector(".gun-lab-auto-complete__options");
-    const formParent = document.querySelector(".form-group");
+    const dropdown = document.querySelector(".custom-dropdown");
+    const optionsList = document.querySelector(".options-list");
 
     let searchOptions = [
         "AKM - GLACIER",
@@ -366,41 +366,36 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
         "MACHETE - DRAKONBANE"
     ];
 
-    const fuse = new Fuse(searchOptions, { threshold: 0.2 });
-
     const updateResults = (event) => {
-    let options = "";
     const inputField = event.currentTarget;
-    const searchResults = fuse.search(inputField.value);
+    const inputValue = inputField.value.trim().toLowerCase();
 
-    // toggle auto complete dropdown
-    if (inputField.value.length > 0) {
-        formParent.classList.add("active");
-        resultParent.parentElement.style.display = "block";
-    } else {
-        formParent.classList.remove("active");
-        resultParent.parentElement.style.display = "none";
-    }
+    let options = "";
 
-    if (searchResults.length > 0) {
-        searchResults.forEach((listItem) => {
-        options += `<option>${listItem.item}</option>`;
+    if (inputValue.length > 0) {
+        searchOptions.forEach((option) => {
+        if (option.toLowerCase().includes(inputValue)) {
+            options += `<li>${option}</li>`;
+        }
         });
-    } else {
-        options = "<option>No results found</option>";
     }
 
-    resultParent.innerHTML = options;
+    optionsList.innerHTML = options;
+
+    if (options.length > 0) {
+        dropdown.classList.add("open");
+    } else {
+        dropdown.classList.remove("open");
+    }
     };
 
     searchInput.addEventListener("keyup", (event) => updateResults(event));
 
-    resultParent.addEventListener("click", (event) => {
+    optionsList.addEventListener("click", (event) => {
     const clickedItem = event.target;
-    if (clickedItem.tagName === "OPTION") {
+    if (clickedItem.tagName === "LI") {
         searchInput.value = clickedItem.textContent;
-        formParent.classList.remove("active");
-        resultParent.parentElement.style.display = "none";
+        dropdown.classList.remove("open");
     }
     });
 

@@ -2396,3 +2396,40 @@ a:hover.back-to-top {
 .specialFormGroup.active .gun-lab-auto-complete__options {
 	display: block;
 } */
+
+
+.gun-lab-auto-complete {
+  position: relative;
+}
+
+.custom-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1;
+}
+
+.custom-dropdown.open {
+  display: block;
+}
+
+.options-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options-list li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.options-list li:hover {
+  background-color: #f0f0f0;
+}
