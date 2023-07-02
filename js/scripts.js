@@ -300,8 +300,9 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
     // START - Gun Lab Auto Complete
     // -------------------------------------------
     const searchInput = document.querySelector("#gunLabWeaponSearch");
-    const resultParent = document.querySelector(".gun-lab-auto-complete");
+    const resultParent = document.querySelector(".gun-lab-auto-complete__options");
     const formParent = document.querySelector(".form-group");
+
     let searchOptions = [
         "AKM - GLACIER",
         "AKM - STAR SEA",
@@ -368,37 +369,42 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
     const fuse = new Fuse(searchOptions, { threshold: 0.2 });
 
     const updateResults = (event) => {
-        let list = "";
-        const inputField = event.currentTarget;
-        const searchResults = fuse.search(inputField.value);
+    let options = "";
+    const inputField = event.currentTarget;
+    const searchResults = fuse.search(inputField.value);
 
-        // toggle auto complete dropdown
-        if (inputField.value.length > 0) {
-            formParent.classList.add("active");
-        } else {
-            formParent.classList.remove("active");
-        }
+    // toggle auto complete dropdown
+    if (inputField.value.length > 0) {
+        formParent.classList.add("active");
+        resultParent.parentElement.style.display = "block";
+    } else {
+        formParent.classList.remove("active");
+        resultParent.parentElement.style.display = "none";
+    }
 
-        if (searchResults.length > 0) {
-            searchResults.map(
-                (listItem) => (list += `<li tabindex="0">${listItem.item}</li>`)
-            );
-        } else {
-            list = "No results found";
-        }
+    if (searchResults.length > 0) {
+        searchResults.forEach((listItem) => {
+        options += `<option>${listItem.item}</option>`;
+        });
+    } else {
+        options = "<option>No results found</option>";
+    }
 
-        resultParent.innerHTML = list;
+    resultParent.innerHTML = options;
     };
 
     searchInput.addEventListener("keyup", (event) => updateResults(event));
 
     resultParent.addEventListener("click", (event) => {
-        const clickedItem = event.target;
-        if (clickedItem.tagName === "LI") {
-            searchInput.value = clickedItem.textContent;
-            formParent.classList.remove("active");
-        }
+    const clickedItem = event.target;
+    if (clickedItem.tagName === "OPTION") {
+        searchInput.value = clickedItem.textContent;
+        formParent.classList.remove("active");
+        resultParent.parentElement.style.display = "none";
+    }
     });
+
+
     // -------------------------------------------
     // END - Gun Lab Auto Complete
     // -------------------------------------------
