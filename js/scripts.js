@@ -190,113 +190,6 @@
     });
 
     // -------------------------------------------
-    // -------------------------------------------
-    // Description Form element
-    const form = document.getElementById('descriptionForm');
-    const textarea = document.getElementById('descriptionTextArea');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        const copyButton = document.getElementById('copyButton');
-        copyButton.innerText = 'Copy to Clipboard'; // By Default after each change
-
-        // Player Account Details
-        const accountLevel = document.getElementById('accLevel').value;
-        const evoLevel = document.getElementById('evoLevel').value;
-        const startSeason = document.getElementById('sSeason').value;
-        const achievePoints = document.getElementById('achPoints').value;
-
-        // RP Seasons
-        const rpFirstSeason = document.getElementById('rpFirstSeason').value;
-        const rpLastSeason = document.getElementById('rpLastSeason').value;
-
-
-        // Do something with the value (e.g., display it)
-        console.log('Acc Level:', accountLevel);
-        console.log('Evo:', evoLevel);
-        console.log('Start S:', startSeason);
-        console.log('Achieve:', achievePoints);
-        console.log('RP First:', rpFirstSeason);
-        console.log('RP Last:', rpLastSeason);
-
-        // Populating Text Area [DO NOT CHANGE LAYOUT BELOW]
-        const mainSection = `
-🟢GLACIER LEVEL 06 | MUMMY SET | INFERNO RIDER HELMET | 12 GUN LAB | 04 KILL MSG | MYTHIC FACTION | COOL ACCOUNT
-
-🤍WHITE MUMMY SET(MYTHIC)
-🤹‍♀INFERNO RIDER HELMET
-
-
-🔰ACCOUNT LEVEL - ${accountLevel}
-🔰EVO LEVEL - ${evoLevel}
-🔰START SEASON - ${startSeason}
-🔰ACHIEVEMENTS - ${achievePoints}
-
-
-🌟RP SEASON - ${rpFirstSeason} to ${rpLastSeason} MAX
-
-
-◻12 GUN LAB | 04 KILL MSG
-
-🔥M416 - GLACIER LEVEL 06
-🔥AKM - GHILLE DRAGON LEVEL 04
-🔥M24 - KILLER TUNE LEVEL 04
-🔥VECTOR - GILDED REAPER LEVEL 04
-🔥M416 - FOOL LEVEL 01
-🔥SCARAL - DROP THE BASS LEVEL 01
-🔥UMP - 08 BIT BLAST LEVEL 01
-🔥GROZA - SPLENDID BATTLE LEVEL 01
-🔥M16A4 - SKELETAL CORE LEVEL 01
-🔥KAR98K - NIGHT OF ROCK LEVEL 01
-🔥AUG - WANDERING CIRCUS LEVEL 01
-🔥MACHETE - DRAKON BANE LEVEL 01
-
-
-▫INFERNO RIDER HELMET
-▫MUMMY SET
-▫VAMPIRE SET
-▫JOKER OF SPADES SET
-▫VI SET
-▫JAYCE SET
-▫CYCLE 02 SET
-▫CYCLE 03 SET
-▫FOOL MASK
-▫S2 WANDERER SET
-
-
-▫03 GUN SLOTS UNLOCKED
-
-
-✅LOGIN - TWITTER + 3RD MAIL (CLEAR LOGINS)
-
-
-💰PRIZE - DM ME`;
-
-        const footerLinksSection = `\n\n
-✅ඔබට 𝐏𝐔𝐁𝐆 ගිණුමක් මිල දී ගැනීමට හෝ විකුණා ගැනීමට අවශ්‍යයි අපගේ WHATSAPP GROUP එකට එකතු වන්න
-
-✅CONTACT ME IF YOU WANT TO BUY OR SELL 𝐏𝐔𝐁𝐆 ACCOUNT
-
-WHATSAPP GROUP (01)
-
-https://chat.whatsapp.com/Dev7rFcJyGn8EkCfCMqdjU
-
-WHATSAPP GROUP (02)
-
-https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
-
-
-        // Populate TextArea
-        const finalText = mainSection + footerLinksSection;
-        textarea.value = finalText;
-
-        // You can also clear the input field after submission if needed
-        // nameInput.value = '';
-    });
-    // -------------------------------------------
-    // -------------------------------------------
-
-    // -------------------------------------------
     // START - Gun Lab Auto Complete
     // -------------------------------------------
     const searchInput = document.querySelector("#gunLabWeaponSearch");
@@ -399,11 +292,108 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
     }
     });
 
-
     // -------------------------------------------
     // END - Gun Lab Auto Complete
     // -------------------------------------------
 
+    // -------------------------------------------
+    // START - FORM Section
+    // -------------------------------------------
+    const form = document.getElementById('descriptionForm');
+    const textarea = document.getElementById('descriptionTextArea');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const copyButton = document.getElementById('copyButton');
+        copyButton.innerText = 'Copy to Clipboard'; // By Default after each change
+
+        // Player Account Details
+        const accountLevel = document.getElementById('accLevel').value;
+        const evoLevel = document.getElementById('evoLevel').value;
+        const startSeason = document.getElementById('sSeason').value;
+        const achievePoints = document.getElementById('achPoints').value;
+
+        // RP Seasons
+        const rpFirstSeason = document.getElementById('rpFirstSeason').value;
+        const rpLastSeason = document.getElementById('rpLastSeason').value;
+
+        // Gun Lab
+        const gunLabWeaponSkin = document.getElementById('gunLabWeaponSearch').value;
+        const gunLabWeaponLevel = document.getElementById('gunLabWeaponLevel').value;
+
+
+        // Do something with the value (e.g., display it)
+        console.log('Acc Level:', accountLevel);
+        console.log('Evo:', evoLevel);
+        console.log('Weapon:', gunLabWeaponSkin);
+        console.log('Weapon Level:', gunLabWeaponLevel);
+
+
+        // Populating Text Area [DO NOT CHANGE LAYOUT BELOW]
+        const headerSection = `🟢GLACIER LEVEL 06 | MUMMY SET | INFERNO RIDER HELMET | 12 GUN LAB | 04 KILL MSG | MYTHIC FACTION | COOL ACCOUNT
+
+🤍WHITE MUMMY SET(MYTHIC)
+🤹‍♀INFERNO RIDER HELMET`;
+
+        const mainSection = `\n\n
+🔰ACCOUNT LEVEL - ${accountLevel}
+🔰EVO LEVEL - ${evoLevel}
+🔰START SEASON - ${startSeason}
+🔰ACHIEVEMENTS - ${achievePoints}
+
+
+🌟RP SEASON - ${rpFirstSeason} to ${rpLastSeason} MAX
+
+
+◻01 GUN LAB | 01 KILL MSG
+
+🔥${gunLabWeaponSkin} ${gunLabWeaponLevel}
+
+
+▫INFERNO RIDER HELMET
+▫MUMMY SET
+▫VAMPIRE SET
+▫JOKER OF SPADES SET
+▫VI SET
+▫JAYCE SET
+▫CYCLE 02 SET
+▫CYCLE 03 SET
+▫FOOL MASK
+▫S2 WANDERER SET
+
+
+▫03 GUN SLOTS UNLOCKED
+
+
+✅LOGIN - TWITTER + 3RD MAIL (CLEAR LOGINS)
+
+
+💰PRIZE - DM ME`;
+
+        const footerLinksSection = `\n\n
+✅ඔබට 𝐏𝐔𝐁𝐆 ගිණුමක් මිල දී ගැනීමට හෝ විකුණා ගැනීමට අවශ්‍යයි අපගේ WHATSAPP GROUP එකට එකතු වන්න
+
+✅CONTACT ME IF YOU WANT TO BUY OR SELL 𝐏𝐔𝐁𝐆 ACCOUNT
+
+WHATSAPP GROUP (01)
+
+https://chat.whatsapp.com/Dev7rFcJyGn8EkCfCMqdjU
+
+WHATSAPP GROUP (02)
+
+https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
+
+
+        // Populate TextArea
+        const finalText = headerSection + mainSection + footerLinksSection;
+        textarea.value = finalText;
+
+        // You can also clear the input field after submission if needed
+        // nameInput.value = '';
+    });
+    // -------------------------------------------
+    // END - FORM Section
+    // -------------------------------------------
 
     /* Registration Form */
     $("#registrationForm").validator().on("submit", function(event) {
