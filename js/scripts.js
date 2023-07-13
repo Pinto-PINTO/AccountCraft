@@ -189,12 +189,14 @@
 		}
     });
 
+    
+
     // -------------------------------------------
     // START - Gun Lab Auto Complete
     // -------------------------------------------
-    const searchInput = document.querySelector("#gunLabWeaponSearch");
-    const dropdown = document.querySelector(".custom-dropdown");
-    const optionsList = document.querySelector(".options-list");
+    const searchInputs = document.querySelectorAll('input[id^="gunLabWeaponSearch"]');
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+    const optionsLists = document.querySelectorAll('.options-list');
 
     let searchOptions = [
         "AKM - GLACIER",
@@ -204,8 +206,6 @@
         "AUG - WANDERING CIR",
         "AWM - GODZILLA",
         "AWM - MAUVE AVENGER",
-        "BIZON - BLAZING",
-        "BIZON - SKULL CRUSHER",
         "PP-BIZON - SKULLCRUSHER",
         "PP-BIZON - BLAZING",
         "DP28 - JADE DRAGON",
@@ -262,6 +262,8 @@
     const updateResults = (event) => {
     const inputField = event.currentTarget;
     const inputValue = inputField.value.trim().toLowerCase();
+    const dropdown = inputField.closest('.query-filter').querySelector('.custom-dropdown');
+    const optionsList = dropdown.querySelector('.options-list');
 
     let options = "";
 
@@ -282,15 +284,23 @@
     }
     };
 
-    searchInput.addEventListener("keyup", (event) => updateResults(event));
-
-    optionsList.addEventListener("click", (event) => {
-    const clickedItem = event.target;
-    if (clickedItem.tagName === "LI") {
-        searchInput.value = clickedItem.textContent;
-        dropdown.classList.remove("open");
-    }
+    searchInputs.forEach((input) => {
+    input.addEventListener("keyup", (event) => updateResults(event));
     });
+
+    optionsLists.forEach((optionsList) => {
+    optionsList.addEventListener("click", (event) => {
+        const clickedItem = event.target;
+        if (clickedItem.tagName === "LI") {
+        const inputField = clickedItem.closest('.query-filter').querySelector('input.form-control-input');
+        const dropdown = inputField.closest('.query-filter').querySelector('.custom-dropdown');
+        inputField.value = clickedItem.textContent;
+        dropdown.classList.remove("open");
+        }
+    });
+    });
+
+
 
     // -------------------------------------------
     // END - Gun Lab Auto Complete
@@ -302,31 +312,55 @@
     const form = document.getElementById('descriptionForm');
     const textarea = document.getElementById('descriptionTextArea');
     form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); // Prevent the default form submission
 
-        const copyButton = document.getElementById('copyButton');
-        copyButton.innerText = 'Copy to Clipboard'; // By Default after each change
+    const copyButton = document.getElementById('copyButton');
+    copyButton.innerText = 'Copy to Clipboard'; // By Default after each change
 
-        // Player Account Details
-        const accountLevel = document.getElementById('accLevel').value;
-        const evoLevel = document.getElementById('evoLevel').value;
-        const startSeason = document.getElementById('sSeason').value;
-        const achievePoints = document.getElementById('achPoints').value;
+    // Player Account Details
+    const accountLevel = document.getElementById('accLevel').value;
+    const evoLevel = document.getElementById('evoLevel').value;
+    const startSeason = document.getElementById('sSeason').value;
+    const achievePoints = document.getElementById('achPoints').value;
 
-        // RP Seasons
-        const rpFirstSeason = document.getElementById('rpFirstSeason').value;
-        const rpLastSeason = document.getElementById('rpLastSeason').value;
+    // RP Seasons
+    const rpFirstSeason = document.getElementById('rpFirstSeason').value;
+    const rpLastSeason = document.getElementById('rpLastSeason').value;
 
-        // Gun Lab
-        const gunLabWeaponSkin = document.getElementById('gunLabWeaponSearch').value;
-        const gunLabWeaponLevel = document.getElementById('gunLabWeaponLevel').value;
+    // Gun Lab
+    const gunLabWeaponSearchInputs = document.querySelectorAll('input[id^="gunLabWeaponSearch"]');
+    const gunLabWeaponLevelInputs = document.querySelectorAll('select[id^="gunLabWeaponLevel"]');
 
+    // Weapon Array
+    const weaponMappings = [];
 
-        // Do something with the value (e.g., display it)
-        console.log('Acc Level:', accountLevel);
-        console.log('Evo:', evoLevel);
-        console.log('Weapon:', gunLabWeaponSkin);
-        console.log('Weapon Level:', gunLabWeaponLevel);
+    // Iterate over the gunLabWeaponSearchInputs and populate the weaponMappings array
+    gunLabWeaponSearchInputs.forEach((searchInput, index) => {
+    const gunLabWeaponLevel = gunLabWeaponLevelInputs[index].value;
+    const weaponMapping = {
+        skin: searchInput.value,
+        level: gunLabWeaponLevel
+    };
+        weaponMappings.push(weaponMapping);
+    });
+
+    // Do something with the values (e.g., display them)
+    console.log('Weapon Skin and Level Mappings:');
+    weaponMappings.forEach((mapping, index) => {
+    console.log(`Weapon ${index + 1}: Skin - ${mapping.skin}, Level - ${mapping.level}`);
+    });
+
+    // Do something with the values (e.g., display them)
+    console.log('Acc Level:', accountLevel);
+    console.log('Evo:', evoLevel);
+    console.log('Start Season:', startSeason);
+    console.log('Achieve Points:', achievePoints);
+    console.log('RP First Season:', rpFirstSeason);
+    console.log('RP Last Season:', rpLastSeason);
+
+    const weaponSection = weaponMappings
+    .map((mapping, index) => `🔥${mapping.skin} ${mapping.level}`)
+    .join('\n');
 
 
         // Populating Text Area [DO NOT CHANGE LAYOUT BELOW]
@@ -347,7 +381,7 @@
 
 ◻01 GUN LAB | 01 KILL MSG
 
-🔥${gunLabWeaponSkin} ${gunLabWeaponLevel}
+${weaponSection}
 
 
 ▫INFERNO RIDER HELMET
@@ -391,6 +425,174 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
         // You can also clear the input field after submission if needed
         // nameInput.value = '';
     });
+
+    // -------------------------------------------
+    // START - GUN Row Insertion Section
+    // -------------------------------------------
+    // Get the container element where the new rows will be appended
+    const container = document.querySelector('.gun-container');
+    let gunCounter = 2;
+    
+    const searchOptions1 = [
+        "AKM - GLACIER",
+        "AKM - STAR SEA",
+        "AKM - GHILLIE DRAGON",
+        "AKM - GOLD PIRATE",
+        "AUG - WANDERING CIR",
+        "AWM - GODZILLA",
+        "AWM - MAUVE AVENGER",
+        "PP-BIZON - SKULLCRUSHER",
+        "PP-BIZON - BLAZING",
+        "DP28 - JADE DRAGON",
+        "DP28 - GILDED DRAGON",
+        "DP28 - ENIGMATIC KILLER",
+        "GROZA - EVENTIDE ARIA",
+        "GROZA - RYOMEN SUKUNA",
+        "KAR98K - NEBULA HUNTER",
+        "KAR98K - MOONLIT GRACE",
+        "KAR98K - NIGHT ROCK",
+        "M16A4 - AURORA PULSE",
+        "M16A4 - SKELETAL CORE",
+        "M24 - KILLER TUNE",
+        "M24 - PHARAOH MIGHT",
+        "M24 - LADY BUTTERFLY",
+        "M249 - PARTY PARCEL",
+        "M249 - WINTER QUEEN",
+        "MG3 - SOARING DRAGON",
+        "M416 - GLACIER",
+        "M416 - FOOL",
+        "M416 - WANDERER",
+        "M762 - STRAY REBELLION",
+        "M762 - DEADLY PRECISION",
+        "M762 - 8-BIT UNICORN",
+        "MINI14 - ICICLE",
+        "PAN - ACCOLADE",
+        "PAN - NIGHT ROCK",
+        "PAN - TASTY CHEESE",
+        "QBZ - DAZZLING SUN",
+        "QBZ - FATAL STRIKE",
+        "SCAR-L - PUMPKIN",
+        "SCAR-L - BLOODSTAINED",
+        "SCAR-L - DROP THE BASS",
+        "SKORPION - GOLDEN CIPHER",
+        "SKS - SNOWCAPPED",
+        "SKS - LADY CARMINE",
+        "SKS - METAL MEDLEY",
+        "THOMPSON - STEAMPUNK",
+        "THOMPSON - CANDY CANE",
+        "UMP45 - EMP",
+        "UMP45 - ANNIVERSARY (AUTO MAX)",
+        "UMP45 - PLATINUM RIPPER",
+        "UMP45 - 8-BIT BLAST",
+        "UMP45 - RAINBOW",
+        "UZI - SHIMMER PWR",
+        "UZI - ETHEREAL EMBLEM",
+        "UZI - ROMANTIC MOMENTS",
+        "VECTOR - BLOOD TOOTH",
+        "VECTOR - GOLDEN EARL",
+        "VSS - CROW",
+        "MACHETE - DRAKONBANE"
+    ];
+    
+    const createNewRow = () => {
+      const newRow = document.createElement('div');
+      newRow.classList.add('row');
+      newRow.innerHTML = `
+        <div class="col-6">
+          <div class="form-group specialFormGroup">
+            <div class="query-filter">
+              <input type="text" class="form-control-input" id="gunLabWeaponSearch${gunCounter}" name="gunLabWeaponSearch${gunCounter}" required>
+              <label class="label-control" for="gunLabWeaponSearch${gunCounter}">Select the Upgradable Gun from Inventory</label>
+              <div class="gun-lab-auto-complete" tabindex="0">
+                <div class="custom-dropdown">
+                  <ul class="options-list">
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <select class="form-control-select" id="gunLabWeaponLevel${gunCounter}" required>
+              <option class="select-option" value="" disabled selected>Select Gun Level</option>
+              <option class="select-option" value="LEVEL 1">Level 1</option>
+              <option class="select-option" value="LEVEL 2">Level 2</option>
+              <option class="select-option" value="LEVEL 3">Level 3</option>
+              <option class="select-option" value="LEVEL 4">Level 4</option>
+              <option class="select-option" value="LEVEL 5">Level 5</option>
+              <option class="select-option" value="LEVEL 6">Level 6</option>
+              <option class="select-option" value="LEVEL 7">Level 7</option>
+              <option class="select-option" value="LEVEL 8">Level 8</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <button class="btn-outline-lg delete-gun-btn">Delete Gun</button>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      `;
+    
+      gunCounter++;
+      container.appendChild(newRow);
+    
+      // Attach the autocomplete logic to the newly added input field
+      const newSearchInput = newRow.querySelector(`#gunLabWeaponSearch${gunCounter - 1}`);
+      const newDropdown = newRow.querySelector('.custom-dropdown');
+      const newOptionsList = newRow.querySelector('.options-list');
+    
+      const updateResults = (event) => {
+        const inputValue = event.target.value.trim().toLowerCase();
+        let options = "";
+    
+        if (inputValue.length > 0) {
+          searchOptions1.forEach((option) => {
+            if (option.toLowerCase().includes(inputValue)) {
+              options += `<li>${option}</li>`;
+            }
+          });
+        }
+    
+        newOptionsList.innerHTML = options;
+    
+        if (options.length > 0) {
+          newDropdown.classList.add('open');
+        } else {
+          newDropdown.classList.remove('open');
+        }
+      };
+    
+      newSearchInput.addEventListener('keyup', updateResults);
+    
+      newOptionsList.addEventListener('click', (event) => {
+        const clickedItem = event.target;
+        if (clickedItem.tagName === 'LI') {
+          newSearchInput.value = clickedItem.textContent;
+          newDropdown.classList.remove('open');
+        }
+      });
+    };
+    
+    const addGunBtn = document.querySelector('.add-gun-btn');
+    addGunBtn.addEventListener('click', createNewRow);
+    
+    container.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-gun-btn')) {
+        const row = event.target.closest('.row');
+        row.remove();
+      }
+    });
+    
+
+
+    // -------------------------------------------
+    // END - GUN Row Insertion Section
+    // -------------------------------------------
+
     // -------------------------------------------
     // END - FORM Section
     // -------------------------------------------
