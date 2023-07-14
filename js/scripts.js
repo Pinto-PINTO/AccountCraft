@@ -332,10 +332,9 @@
     const gunLabWeaponSearchInputs = document.querySelectorAll('input[id^="gunLabWeaponSearch"]');
     const gunLabWeaponLevelInputs = document.querySelectorAll('select[id^="gunLabWeaponLevel"]');
 
-    // Weapon Array
+    // Weapon Array [MAPPING GUNS AND SKINS TO CLIPBOARD] -----------------
     const weaponMappings = [];
 
-    // Iterate over the gunLabWeaponSearchInputs and populate the weaponMappings array
     gunLabWeaponSearchInputs.forEach((searchInput, index) => {
     const gunLabWeaponLevel = gunLabWeaponLevelInputs[index].value;
     const weaponMapping = {
@@ -345,23 +344,48 @@
         weaponMappings.push(weaponMapping);
     });
 
-    // Do something with the values (e.g., display them)
+    // Kill Msg Count
+    var killMsgCount = 0;
+
     console.log('Weapon Skin and Level Mappings:');
     weaponMappings.forEach((mapping, index) => {
-    console.log(`Weapon ${index + 1}: Skin - ${mapping.skin}, Level - ${mapping.level}`);
+        console.log(`Weapon ${index + 1}: Skin - ${mapping.skin}, Level - ${mapping.level}`);
+
+        // Kill msg count logic
+        const gunLevel = mapping.level;
+        const extractedNumber = parseInt(gunLevel.match(/\d+/)[0]);
+
+        if (extractedNumber > 3) {
+            killMsgCount = killMsgCount + 1
+        }
+        console.log(killMsgCount)
+
     });
 
-    // Do something with the values (e.g., display them)
-    console.log('Acc Level:', accountLevel);
-    console.log('Evo:', evoLevel);
-    console.log('Start Season:', startSeason);
-    console.log('Achieve Points:', achievePoints);
-    console.log('RP First Season:', rpFirstSeason);
-    console.log('RP Last Season:', rpLastSeason);
+    // Concat '0' for KILL MSG COUNT
+    var newkillMsgCount = 0;
+    if (killMsgCount < 10) {
+        newkillMsgCount = "0" + killMsgCount;
+    } else {
+        newkillMsgCount = killMsgCount;
+    }
 
     const weaponSection = weaponMappings
     .map((mapping, index) => `🔥${mapping.skin} ${mapping.level}`)
     .join('\n');
+
+    // Weapon Array END -----------------
+
+
+    // Gun Lab Count
+    const gunLabCount = weaponMappings.length;
+    var newgunLabCount = 0;
+    if (gunLabCount < 10) {
+        newgunLabCount = "0" + gunLabCount;
+    } else {
+        newgunLabCount = gunLabCount;
+    }
+ 
 
 
         // Populating Text Area [DO NOT CHANGE LAYOUT BELOW]
@@ -380,7 +404,7 @@
 🌟RP SEASON - ${rpFirstSeason} to ${rpLastSeason} MAX
 
 
-◻01 GUN LAB | 01 KILL MSG
+◻${newgunLabCount} GUN LAB | ${newkillMsgCount} KILL MSG
 
 ${weaponSection}
 
@@ -525,8 +549,8 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
               <option class="select-option" value="LEVEL 4">Level 4</option>
               <option class="select-option" value="LEVEL 5">Level 5</option>
               <option class="select-option" value="LEVEL 6">Level 6</option>
-              <option class="select-option" value="LEVEL 7">Level 7</option>
-              <option class="select-option" value="LEVEL 8">Level 8</option>
+              <option class="select-option" value="LEVEL 7 (MAX)">Level 7</option>
+              <option class="select-option" value="LEVEL 8 (MAX)">Level 8</option>
             </select>
             <div class="help-block with-errors"></div>
           </div>
