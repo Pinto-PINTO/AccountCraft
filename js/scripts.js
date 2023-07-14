@@ -324,6 +324,9 @@
     const startSeason = document.getElementById('sSeason').value;
     const achievePoints = document.getElementById('achPoints').value;
 
+    // Mythic Fashion
+    const mythicFashion = document.getElementById('mythicFashion').value;
+
     // RP Seasons
     const rpFirstSeason = document.getElementById('rpFirstSeason').value;
     const rpLastSeason = document.getElementById('rpLastSeason').value;
@@ -389,10 +392,10 @@
 
 
         // Populating Text Area [DO NOT CHANGE LAYOUT BELOW]
-        const headerSection = `🟢GLACIER LEVEL 06 | MUMMY SET | INFERNO RIDER HELMET | 12 GUN LAB | 04 KILL MSG | MYTHIC FACTION | COOL ACCOUNT
+        const headerSection = `🟢RARE INVENTORY | ${newgunLabCount} GUNS LAB | ${newkillMsgCount} KILL MSG | OLD RP | 03 TIME CONQUEROR | GLOBAL ACCOUNT
 
-🤍WHITE MUMMY SET(MYTHIC)
-🤹‍♀INFERNO RIDER HELMET`;
+
+💕MYTHIC FASHION ACC(${mythicFashion}/300)`;
 
         const mainSection = `\n\n
 🔰ACCOUNT LEVEL - ${accountLevel}
@@ -404,7 +407,7 @@
 🌟RP SEASON - ${rpFirstSeason} to ${rpLastSeason} MAX
 
 
-◻${newgunLabCount} GUN LAB | ${newkillMsgCount} KILL MSG
+◻${newgunLabCount} GUNS LAB | ${newkillMsgCount} KILL MSG
 
 ${weaponSection}
 
