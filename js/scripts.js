@@ -370,6 +370,76 @@
     // -------------------------------------------
 
     // -------------------------------------------
+    // START - EXPENSIVE VEHICLE Auto Complete
+    // -------------------------------------------
+    const vehicleSearchInputs = document.querySelectorAll('input[id^="vehicleSearch"]');
+    const vehcileOptionsLists = document.querySelectorAll('.options-list-vehicle');
+
+    const vehicleSearchOptions = [
+        "BUGATTI VEYRON 16.4",
+        "BUGATTI VEYRON 16.4 (GOLD)",
+        "BUGATTI LA VOITURE NOIRE",
+        "BUGATTI LA VOITRE NOIRE (ALLOY)",
+        "KOENIGSEGG JESKO (RAINBOW)",
+        "KOENIGSEGG JESKO (SILVER GRAY)",
+        "LAMBORGHINI AVENTADOR SVJ BLUE",
+        "LAMBORGHINI ESTOQUE METAL GRAY",
+        "LAMBORGHINI URUS GIALLO (UAZ)",
+        "LAMBORGHINI URUS GIALLO INTI",
+        "MCLAREN 570S (ROYAL BLACK)",
+        "TESLA CYBERTRUCK (BLACK-QUARZ)",
+        "TESLA ROADSTER (AMETHYST)",
+        "TESLA ROADSTER (DIAMOND)"
+    ];
+
+    const updateVehickeResults = (event) => {
+    const inputField = event.currentTarget;
+    const inputValue = inputField.value.trim().toLowerCase();
+    const dropdown = inputField.closest('.query-filter').querySelector('.custom-dropdown-vehicle');
+    const optionsList = dropdown.querySelector('.options-list-vehicle');
+
+    let options = "";
+
+    if (inputValue.length > 0) {
+        vehicleSearchOptions.forEach((option) => {
+        if (option.toLowerCase().includes(inputValue)) {
+            options += `<li>${option}</li>`;
+        }
+        });
+    }
+
+    optionsList.innerHTML = options;
+
+    if (options.length > 0) {
+        dropdown.classList.add("open");
+    } else {
+        dropdown.classList.remove("open");
+    }
+    };
+
+    vehicleSearchInputs.forEach((input) => {
+    input.addEventListener("keyup", (event) => updateVehickeResults(event));
+    });
+
+    vehcileOptionsLists.forEach((optionsList) => {
+    optionsList.addEventListener("click", (event) => {
+        const clickedItem = event.target;
+        if (clickedItem.tagName === "LI") {
+        const inputField = clickedItem.closest('.query-filter').querySelector('input.form-control-input');
+        const dropdown = inputField.closest('.query-filter').querySelector('.custom-dropdown-vehicle');
+        inputField.value = clickedItem.textContent;
+        dropdown.classList.remove("open");
+        }
+    });
+    });
+
+
+
+    // -------------------------------------------
+    // END - EXPENSIVE VEHICLE Auto Complete
+    // -------------------------------------------
+
+    // -------------------------------------------
     // START - FORM Section
     // -------------------------------------------
     const form = document.getElementById('descriptionForm');
@@ -401,7 +471,10 @@
     const xsuitSearchInputs = document.querySelectorAll('input[id^="xsuitSearch"]');
     const xsuitnLevelInputs = document.querySelectorAll('select[id^="xsuitLevel"]');
 
-    
+    // Expensive Vehicles
+    const vehicleSearchInputs = document.querySelectorAll('input[id^="vehicleSearch"]');
+
+        
     // Weapon Array [MAPPING GUNS AND SKINS TO CLIPBOARD] -----------------
     const weaponMappings = [];
 
@@ -472,6 +545,21 @@
     const xsuitSection = xsuitMappings
     .map((mapping, index) => `☀${mapping.skin} ${mapping.level}`)
     .join('\n');
+
+
+    // Expensive Vehicles [MAPPING TO CLIPBOARD]
+    const vehicleMappings = [];
+
+    vehicleSearchInputs.forEach((searchInput) => {
+        const vehicleMapping = {
+            skin: searchInput.value,
+        };
+        vehicleMappings.push(vehicleMapping);
+    });
+
+    const vehicleSection = vehicleMappings
+    .map((mapping) => `🚗${mapping.skin}`)
+    .join('\n');
  
 
 
@@ -482,7 +570,10 @@
 💕MYTHIC FASHION ACC(${mythicFashion}/300)
 
 
-${xsuitSection}`;
+${xsuitSection}
+
+
+${vehicleSection}`;
 
         const mainSection = `\n\n
 🔰ACCOUNT LEVEL - ${accountLevel}
@@ -822,6 +913,113 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
 
     // -------------------------------------------
     // END - XSUIT Row Insertion Section
+    // -------------------------------------------
+
+    // -------------------------------------------
+    // START - EXPENSIVE VEHICLE Row Insertion Section
+    // -------------------------------------------
+    // Get the container element where the new rows will be appended
+    const vehiclecontainer = document.querySelector('.vehicle-container');
+    let vehicleCounter = 2;
+    
+    const vehicleSearchOptions1 = [
+        "BUGATTI VEYRON 16.4",
+        "BUGATTI VEYRON 16.4 (GOLD)",
+        "BUGATTI LA VOITURE NOIRE",
+        "BUGATTI LA VOITRE NOIRE (ALLOY)",
+        "KOENIGSEGG JESKO (RAINBOW)",
+        "KOENIGSEGG JESKO (SILVER GRAY)",
+        "LAMBORGHINI AVENTADOR SVJ BLUE",
+        "LAMBORGHINI ESTOQUE METAL GRAY",
+        "LAMBORGHINI URUS GIALLO (UAZ)",
+        "LAMBORGHINI URUS GIALLO INTI",
+        "MCLAREN 570S (ROYAL BLACK)",
+        "TESLA CYBERTRUCK (BLACK-QUARZ)",
+        "TESLA ROADSTER (AMETHYST)",
+        "TESLA ROADSTER (DIAMOND)"
+    ];
+    
+    const vehicleCreateNewRow = () => {
+      const newRow = document.createElement('div');
+      newRow.classList.add('row');
+      newRow.innerHTML = `
+        <div class="col-6">
+          <div class="form-group specialFormGroup">
+            <div class="query-filter">
+              <input type="text" class="form-control-input" id="vehicleSearch${vehicleCounter}" name="vehicleSearch${vehicleCounter}" required>
+              <label class="label-control" for="vehicleSearch${vehicleCounter}">Select Expensive Vehicles from Inventory</label>
+              <div class="gun-lab-auto-complete" tabindex="0">
+                <div class="custom-dropdown-vehicle">
+                  <ul class="options-list-vehicle">
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <button class="btn-outline-lg delete-vehicle-btn">Delete Expensive Vehicle</button>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      `;
+    
+      vehicleCounter++;
+      vehiclecontainer.appendChild(newRow);
+    
+      // Attach the autocomplete logic to the newly added input field
+      const newSearchInput = newRow.querySelector(`#vehicleSearch${vehicleCounter - 1}`);
+      const newDropdown = newRow.querySelector('.custom-dropdown-vehicle');
+      const newOptionsList = newRow.querySelector('.options-list-vehicle');
+    
+      const updateResults = (event) => {
+        const inputValue = event.target.value.trim().toLowerCase();
+        let options = "";
+    
+        if (inputValue.length > 0) {
+            vehicleSearchOptions1.forEach((option) => {
+            if (option.toLowerCase().includes(inputValue)) {
+              options += `<li>${option}</li>`;
+            }
+          });
+        }
+    
+        newOptionsList.innerHTML = options;
+    
+        if (options.length > 0) {
+          newDropdown.classList.add('open');
+        } else {
+          newDropdown.classList.remove('open');
+        }
+      };
+    
+      newSearchInput.addEventListener('keyup', updateResults);
+    
+      newOptionsList.addEventListener('click', (event) => {
+        const clickedItem = event.target;
+        if (clickedItem.tagName === 'LI') {
+          newSearchInput.value = clickedItem.textContent;
+          newDropdown.classList.remove('open');
+        }
+      });
+    };
+    
+    const addVehicleBtn = document.querySelector('.add-vehicle-btn');
+    addVehicleBtn.addEventListener('click', vehicleCreateNewRow);
+    
+    vehiclecontainer.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-vehicle-btn')) {
+        const row = event.target.closest('.row');
+        row.remove();
+      }
+    });
+    
+
+
+    // -------------------------------------------
+    // END - EXPENSIVE VEHICLE Row Insertion Section
     // -------------------------------------------
 
     // -------------------------------------------
