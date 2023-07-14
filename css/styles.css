@@ -2433,3 +2433,38 @@ a:hover.back-to-top {
 .options-list li:hover {
   background-color: #f0f0f0;
 }
+
+
+/* -------------------------- */
+
+.custom-dropdown-xsuit {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1;
+}
+
+.custom-dropdown-xsuit.open {
+  display: block;
+}
+
+.options-list-xsuit {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options-list-xsuit li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.options-list-xsuit li:hover {
+  background-color: #f0f0f0;
+}

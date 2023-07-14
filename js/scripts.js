@@ -308,6 +308,68 @@
     // -------------------------------------------
 
     // -------------------------------------------
+    // START - X SUIT Auto Complete
+    // -------------------------------------------
+    const xsuitSearchInputs = document.querySelectorAll('input[id^="xsuitSearch"]');
+    const xsuitOptionsLists = document.querySelectorAll('.options-list-xsuit');
+
+    const xsuitSearchOptions = [
+        "GOLDEN PHARAOH X SUIT",
+        "BLOOD RAVEN X SUIT",
+        "POSEIDON X SUIT",
+        "AVALANCHE X SUIT",
+        "SILVANUS X SUIT",
+        "STYGIAN LIEGE X SUIT"
+    ];
+
+    const updateXsuitResults = (event) => {
+    const inputField = event.currentTarget;
+    const inputValue = inputField.value.trim().toLowerCase();
+    const dropdown = inputField.closest('.query-filter').querySelector('.custom-dropdown-xsuit');
+    const optionsList = dropdown.querySelector('.options-list-xsuit');
+
+    let options = "";
+
+    if (inputValue.length > 0) {
+        xsuitSearchOptions.forEach((option) => {
+        if (option.toLowerCase().includes(inputValue)) {
+            options += `<li>${option}</li>`;
+        }
+        });
+    }
+
+    optionsList.innerHTML = options;
+
+    if (options.length > 0) {
+        dropdown.classList.add("open");
+    } else {
+        dropdown.classList.remove("open");
+    }
+    };
+
+    xsuitSearchInputs.forEach((input) => {
+    input.addEventListener("keyup", (event) => updateXsuitResults(event));
+    });
+
+    xsuitOptionsLists.forEach((optionsList) => {
+    optionsList.addEventListener("click", (event) => {
+        const clickedItem = event.target;
+        if (clickedItem.tagName === "LI") {
+        const inputField = clickedItem.closest('.query-filter').querySelector('input.form-control-input');
+        const dropdown = inputField.closest('.query-filter').querySelector('.custom-dropdown-xsuit');
+        inputField.value = clickedItem.textContent;
+        dropdown.classList.remove("open");
+        }
+    });
+    });
+
+
+
+    // -------------------------------------------
+    // END - X SUIT Auto Complete
+    // -------------------------------------------
+
+    // -------------------------------------------
     // START - FORM Section
     // -------------------------------------------
     const form = document.getElementById('descriptionForm');
@@ -335,6 +397,11 @@
     const gunLabWeaponSearchInputs = document.querySelectorAll('input[id^="gunLabWeaponSearch"]');
     const gunLabWeaponLevelInputs = document.querySelectorAll('select[id^="gunLabWeaponLevel"]');
 
+    // X Suits
+    const xsuitSearchInputs = document.querySelectorAll('input[id^="xsuitSearch"]');
+    const xsuitnLevelInputs = document.querySelectorAll('select[id^="xsuitLevel"]');
+
+    
     // Weapon Array [MAPPING GUNS AND SKINS TO CLIPBOARD] -----------------
     const weaponMappings = [];
 
@@ -388,6 +455,23 @@
     } else {
         newgunLabCount = gunLabCount;
     }
+
+
+    // X Suit Array (Mapping to Clipboard)
+    const xsuitMappings = [];
+
+    xsuitSearchInputs.forEach((searchInput, index) => {
+    const gunLabWeaponLevel = xsuitnLevelInputs[index].value;
+    const xsuitMapping = {
+        skin: searchInput.value,
+        level: gunLabWeaponLevel
+    };
+        xsuitMappings.push(xsuitMapping);
+    });
+
+    const xsuitSection = xsuitMappings
+    .map((mapping, index) => `☀${mapping.skin} ${mapping.level}`)
+    .join('\n');
  
 
 
@@ -395,7 +479,10 @@
         const headerSection = `🟢RARE INVENTORY | ${newgunLabCount} GUNS LAB | ${newkillMsgCount} KILL MSG | OLD RP | 03 TIME CONQUEROR | GLOBAL ACCOUNT
 
 
-💕MYTHIC FASHION ACC(${mythicFashion}/300)`;
+💕MYTHIC FASHION ACC(${mythicFashion}/300)
+
+
+${xsuitSection}`;
 
         const mainSection = `\n\n
 🔰ACCOUNT LEVEL - ${accountLevel}
@@ -620,6 +707,121 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
 
     // -------------------------------------------
     // END - GUN Row Insertion Section
+    // -------------------------------------------
+
+    // -------------------------------------------
+    // START - XSUIT Row Insertion Section
+    // -------------------------------------------
+    // Get the container element where the new rows will be appended
+    const xsuitcontainer = document.querySelector('.xsuit-container');
+    let xsuitCounter = 2;
+    
+    const xsuitSearchOptions1 = [
+        "GOLDEN PHARAOH X SUIT",
+        "BLOOD RAVEN X SUIT",
+        "POSEIDON X SUIT",
+        "AVALANCHE X SUIT",
+        "SILVANUS X SUIT",
+        "STYGIAN LIEGE X SUIT"
+    ];
+    
+    const xsuitCreateNewRow = () => {
+      const newRow = document.createElement('div');
+      newRow.classList.add('row');
+      newRow.innerHTML = `
+        <div class="col-6">
+          <div class="form-group specialFormGroup">
+            <div class="query-filter">
+              <input type="text" class="form-control-input" id="xsuitSearch${xsuitCounter}" name="xsuitSearch${xsuitCounter}" required>
+              <label class="label-control" for="xsuitSearch${xsuitCounter}">Select X Suits from Inventory</label>
+              <div class="gun-lab-auto-complete" tabindex="0">
+                <div class="custom-dropdown-xsuit">
+                  <ul class="options-list-xsuit">
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <select class="form-control-select" id="xsuitLevel${xsuitCounter}" required>
+              <option class="select-option" value="" disabled selected>Select X Suit Level</option>
+              <option class="select-option" value="LEVEL 1">Level 1</option>
+              <option class="select-option" value="LEVEL 2">Level 2</option>
+              <option class="select-option" value="LEVEL 3">Level 3</option>
+              <option class="select-option" value="LEVEL 4">Level 4</option>
+              <option class="select-option" value="LEVEL 5">Level 5</option>
+              <option class="select-option" value="LEVEL 6">Level 6</option>
+              <option class="select-option" value="LEVEL 7">Level 7</option>
+              <option class="select-option" value="LEVEL 8">Level 8</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <button class="btn-outline-lg delete-xsuit-btn">Delete X Suit</button>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      `;
+    
+      xsuitCounter++;
+      xsuitcontainer.appendChild(newRow);
+    
+      // Attach the autocomplete logic to the newly added input field
+      const newSearchInput = newRow.querySelector(`#xsuitSearch${xsuitCounter - 1}`);
+      const newDropdown = newRow.querySelector('.custom-dropdown-xsuit');
+      const newOptionsList = newRow.querySelector('.options-list-xsuit');
+    
+      const updateResults = (event) => {
+        const inputValue = event.target.value.trim().toLowerCase();
+        let options = "";
+    
+        if (inputValue.length > 0) {
+            xsuitSearchOptions1.forEach((option) => {
+            if (option.toLowerCase().includes(inputValue)) {
+              options += `<li>${option}</li>`;
+            }
+          });
+        }
+    
+        newOptionsList.innerHTML = options;
+    
+        if (options.length > 0) {
+          newDropdown.classList.add('open');
+        } else {
+          newDropdown.classList.remove('open');
+        }
+      };
+    
+      newSearchInput.addEventListener('keyup', updateResults);
+    
+      newOptionsList.addEventListener('click', (event) => {
+        const clickedItem = event.target;
+        if (clickedItem.tagName === 'LI') {
+          newSearchInput.value = clickedItem.textContent;
+          newDropdown.classList.remove('open');
+        }
+      });
+    };
+    
+    const addXsuitBtn = document.querySelector('.add-xsuit-btn');
+    addXsuitBtn.addEventListener('click', xsuitCreateNewRow);
+    
+    xsuitcontainer.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-xsuit-btn')) {
+        const row = event.target.closest('.row');
+        row.remove();
+      }
+    });
+    
+
+
+    // -------------------------------------------
+    // END - XSUIT Row Insertion Section
     // -------------------------------------------
 
     // -------------------------------------------
