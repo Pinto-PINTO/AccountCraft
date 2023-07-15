@@ -439,6 +439,8 @@
     // END - EXPENSIVE VEHICLE Auto Complete
     // -------------------------------------------
 
+    
+
     // -------------------------------------------
     // START - FORM Section
     // -------------------------------------------
@@ -473,6 +475,22 @@
 
     // Expensive Vehicles
     const vehicleSearchInputs = document.querySelectorAll('input[id^="vehicleSearch"]');
+
+    // Conqueror Seasons
+    const conquerorSearchInputs = document.querySelectorAll('input[id^="conquerorSeason"]');
+
+    const conquerorMappings = [];
+
+    conquerorSearchInputs.forEach((searchInput) => {
+        const conquerorMapping = {
+            skin: searchInput.value,
+        };
+        conquerorMappings.push(conquerorMapping);
+    });
+
+    const conquerorSection = conquerorMappings
+    .map((mapping) => `👑SEASON ${mapping.skin} CONQUEROR`)
+    .join('\n');
 
         
     // Weapon Array [MAPPING GUNS AND SKINS TO CLIPBOARD] -----------------
@@ -573,7 +591,10 @@
 ${xsuitSection}
 
 
-${vehicleSection}`;
+${vehicleSection}
+
+
+${conquerorSection}`;
 
         const mainSection = `\n\n
 🔰ACCOUNT LEVEL - ${accountLevel}
@@ -708,7 +729,7 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
         <div class="col-6">
           <div class="form-group specialFormGroup">
             <div class="query-filter">
-              <input type="text" class="form-control-input" id="gunLabWeaponSearch${gunCounter}" name="gunLabWeaponSearch${gunCounter}" required>
+              <input type="text" class="form-control-input" id="gunLabWeaponSearch${gunCounter}" name="gunLabWeaponSearch${gunCounter}">
               <label class="label-control" for="gunLabWeaponSearch${gunCounter}">Select the Upgradable Gun from Inventory</label>
               <div class="gun-lab-auto-complete" tabindex="0">
                 <div class="custom-dropdown">
@@ -722,7 +743,7 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
         </div>
         <div class="col-3">
           <div class="form-group">
-            <select class="form-control-select" id="gunLabWeaponLevel${gunCounter}" required>
+            <select class="form-control-select" id="gunLabWeaponLevel${gunCounter}">
               <option class="select-option" value="" disabled selected>Select Gun Level</option>
               <option class="select-option" value="LEVEL 1">Level 1</option>
               <option class="select-option" value="LEVEL 2">Level 2</option>
@@ -1020,6 +1041,54 @@ https://chat.whatsapp.com/KNqtUxdoKR88Yu0417gUHh`;
 
     // -------------------------------------------
     // END - EXPENSIVE VEHICLE Row Insertion Section
+    // -------------------------------------------
+
+    // -------------------------------------------
+    // START - CONQUEROR SEASON Row Insertion Section
+    // -------------------------------------------
+    // Get the container element where the new rows will be appended
+    const conquerorcontainer = document.querySelector('.conqueror-container');
+    let conquerorCounter = 2;
+        
+    const conquerorCreateNewRow = () => {
+      const newRow = document.createElement('div');
+      newRow.classList.add('row');
+      newRow.innerHTML = `        
+        <div class="col-6">
+          <div class="form-group">
+              <input type="text" class="form-control-input" id="conquerorSeason${conquerorCounter}" name="conquerorSeason${conquerorCounter}">
+              <label class="label-control" for="conquerorSeason${conquerorCounter}">Conqueror Seasons</label>
+              <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <button class="btn-outline-lg delete-conqueror-btn">Delete Conqueror Season</button>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      `;
+    
+      conquerorCounter++;
+      conquerorcontainer.appendChild(newRow);
+    
+      // Attach the autocomplete logic to the newly added input field
+      const newSearchInput = newRow.querySelector(`#vehicleSearch${conquerorCounter - 1}`);
+    };
+    
+    const addConquerorBtn = document.querySelector('.add-conqueror-btn');
+    addConquerorBtn.addEventListener('click', conquerorCreateNewRow);
+    
+    conquerorcontainer.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-conqueror-btn')) {
+        const row = event.target.closest('.row');
+        row.remove();
+      }
+    });
+    
+
+    // -------------------------------------------
+    // END - CONQUEROR SEASON Row Insertion Section
     // -------------------------------------------
 
     // -------------------------------------------

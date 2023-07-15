@@ -20,6 +20,11 @@
 - Logins 
 --------------------------------
 
+===========
+** CHAT GPT PROMPT to generate description. 
+** Use API. 
+** We will be pasting description in our website and the required description will be auto generated based on the prompt.
+===========
 
 https://codepen.io/steveacalabro/pen/XNYWZY
 
